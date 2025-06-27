@@ -184,6 +184,18 @@ class App:
         return s.strip().split() if "{" not in s else \
                [part.strip("{}") for part in s.split("} {")]
 
+    # ========== add file =======================================================
+    def _add_file(self, path: str):
+        # hindari duplikat
+        if path not in self.files and path.lower().endswith(".png"):
+            self.files.append(path)
+
+            # tulis ke ScrolledText
+            self.lst.configure(state="normal")
+            self.lst.insert("end", f"{path}\n")
+            self.lst.configure(state="disabled")
+
+
 # ── run ─────────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     app = App()
